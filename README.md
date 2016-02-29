@@ -45,7 +45,7 @@ For errors like this:
 
 ```json
 [
-    {field_name: 'username', message_name: 'Username is required and can't be empty'}
+    {"field_name": "username", "message_name": "Username is required and can't be empty"}
 ]
 ```
 
