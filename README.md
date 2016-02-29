@@ -23,14 +23,15 @@ For errors response like this:
    "errors": {
        "errors_internal_bla": {  
            "username": [  
-              "Username is required and can't be empty"
+              "Username is required and can't be empty",
+              "Username should contain latin letters only"
            ]
        }
    }
 }
 ```
 
-use this configuration
+use this configuration 
 
 ```js
 .config(function (ngServerValidateConfigProvider) {
@@ -40,6 +41,8 @@ use this configuration
     });
 });
 ```
+
+!For errors messages more than 1, always be displayed first (in this case: will be displayed - "Username is required and can't be empty")
 
 For errors like this:
 
