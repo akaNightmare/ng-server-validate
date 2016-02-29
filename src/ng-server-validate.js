@@ -32,11 +32,11 @@
                 }
             };
         }])
-        .directive('ngServerValidate', ['SERVER_VALIDATE_EVENT', function (SERVER_VALIDATE_EVENT) {
+        .directive('ngServerValidate', ['ngServerValidateConfig', 'SERVER_VALIDATE_EVENT', function (ngServerValidateConfig, SERVER_VALIDATE_EVENT) {
             return {
                 require: '^form',
                 restrict: 'A',
-                controller: function ($scope, $element, attrs, form, ngServerValidateConfig) {
+                link: function ($scope, $element, attrs, form) {
                     angular.forEach(form, function (ngModel) {
                         if (angular.isObject(ngModel) && ngModel.hasOwnProperty('$modelValue')) {
                             ngModel.$validators.server = function () {
@@ -90,7 +90,10 @@
         })
         .config(['$httpProvider', function ($httpProvider) {
             $httpProvider.interceptors.push('serverValidateResponseInterceptor');
-        }]);
+        }])
+        .run(function () {
+
+        });
 
     function getMessage(field, error) {
         if (angular.isArray(error)) {

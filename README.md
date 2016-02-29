@@ -15,6 +15,52 @@ angular.module('yourApp', [
 ])
 ```
 
+For errors response like this:
+
+```json
+{  
+   "message": "Validation error",
+   "errors": {
+       "errors_internal_bla": {  
+           "username": [  
+              "Username is required and can't be empty"
+           ]
+       }
+   }
+}
+```
+
+use this configuration
+
+```js
+.config(function (ngServerValidateConfigProvider) {
+    ngServerValidateConfigProvider.setConfig({
+        root: 'errors.errors_internal_bla', // root element for all errors
+        field: '__key__', // __key__ -> field (input's name in HTML)
+    });
+});
+```
+
+For errors like this:
+
+```json
+[
+    {field_name: 'username', message_name: 'Username is required and can't be empty'}
+]
+```
+
+use this configuration
+
+```js
+.config(function (ngServerValidateConfigProvider) {
+    ngServerValidateConfigProvider.setConfig({
+        root: null, // no root element
+        field: 'field_name', // name -> field (input's name in HTML)
+        message: 'message_name'
+    });
+});
+```
+
 In your template add the 'ng-server-validate' attribute to the form in which you would like to receive server-side validation errors.
 
 ```html

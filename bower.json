@@ -5,7 +5,8 @@
     "Ivan Zubok <chi_no@ukr.net>"
   ],
   "dependencies": {
-    "angular": "~1.5.0"
+    "angular": "~1.5.0",
+    "ng-server-validate": "*"
   },
   "description": "",
   "main": "src/ng-server-validate.js",
