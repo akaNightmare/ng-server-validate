@@ -15,11 +15,10 @@ angular.module('yourApp', [
 ])
 ```
 
-For errors response like this:
-
+For errors response:
+###Custom errors response
 ```json
 {  
-   "message": "Validation error",
    "errors": {
        "errors_internal_bla": {  
            "username": [  
@@ -42,13 +41,13 @@ use this configuration
 });
 ```
 
-!For errors messages more than 1, always be displayed first (in this case: will be displayed - "Username is required and can't be empty")
+If errors messages more than 1, always be displayed first message (in case from above will be displayed - ``Username is required and can't be empty``)
 
-For errors like this:
+###Yii2 RESTApi style:  
 
 ```json
 [
-    {"field_name": "username", "message_name": "Username is required and can't be empty"}
+    {"field": "username", "message": "Username is required and can't be empty"}
 ]
 ```
 
@@ -58,8 +57,38 @@ use this configuration
 .config(function (ngServerValidateConfigProvider) {
     ngServerValidateConfigProvider.setConfig({
         root: null, // no root element
-        field: 'field_name', // name -> field (input's name in HTML)
-        message: 'message_name'
+        field: 'field',     // field key from JSON response, also it is input's name in HTML -> <input name="username" type="text">
+        message: 'message'  // message key from JSON response. Will be displayed as error message fpr specified input
+    });
+});
+```
+
+###ZF2 apigility style
+
+```json
+{
+    "detail": "Failed Validation",
+    "status": 422,
+    "title": "Unprocessable Entity",
+    "type": "http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html",
+    "validation_messages": {
+        "message": {
+            "isEmpty": "Value is required and can't be empty"
+        },
+        "username": {
+            "regexNotMatch": "Invalid user supplied."
+        }
+    }
+}
+```
+
+use this configuration
+
+```js
+.config(function (ngServerValidateConfigProvider) {
+    ngServerValidateConfigProvider.setConfig({
+        root: 'validation_messages',
+        field: '__key__'
     });
 });
 ```

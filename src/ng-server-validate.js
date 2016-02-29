@@ -98,6 +98,8 @@
     function getMessage(field, error) {
         if (angular.isArray(error)) {
             return error[0];
+        } else if (angular.isObject(error)) {
+            return error[Object.keys(error)[0]];
         }
 
         return error[field];
