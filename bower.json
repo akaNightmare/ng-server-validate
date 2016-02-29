@@ -1,0 +1,21 @@
+{
+  "name": "ng-server-validate",
+  "homepage": "https://github.com/akaNightmare/ng-server-validate",
+  "authors": [
+    "Ivan Zubok <chi_no@ukr.net>"
+  ],
+  "dependencies": {
+    "angular": "~1.5.0"
+  },
+  "description": "",
+  "main": "src/ng-server-validate.js",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
