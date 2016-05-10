@@ -100,6 +100,8 @@
             return error[0];
         } else if (angular.isObject(error)) {
             return error[Object.keys(error)[0]];
+        } else if (angular.isString(error)) {
+            return error;
         }
 
         return error[field];
