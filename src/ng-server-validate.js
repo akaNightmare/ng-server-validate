@@ -52,7 +52,7 @@
                             form.ngServerValidating = false;
 
                             var config = ngServerValidateConfig.config,
-                                errors = config.root === null ? data : resolvePath(data, config.root),
+                                errors = config.root === null ? data.errors : resolvePath(data.errors, config.root),
                                 error, key, field;
 
                             for (key in errors) {
