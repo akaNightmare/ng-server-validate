@@ -44,7 +44,7 @@
                 link: function ($scope, $element, attrs, form) {
                     var config = ngServerValidateConfig.config;
                     try {
-                        angular.extend(config, $scope.$eval(attrs.config));
+                        angular.extend(config, $scope.$eval(attrs.ngServerValidate));
                     } catch (e) {}
 
                     angular.forEach(form, function (ngModel) {
