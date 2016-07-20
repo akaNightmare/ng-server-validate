@@ -11,6 +11,11 @@
                 message: 'message'
             };
 
+            /**
+             * Set global config
+             *
+             * @param {Object} config
+             */
             self.setConfig = function (config) {
                 angular.extend(self.config, config);
             };
@@ -37,6 +42,11 @@
                 require: '^form',
                 restrict: 'A',
                 link: function ($scope, $element, attrs, form) {
+                    var config = ngServerValidateConfig.config;
+                    try {
+                        angular.extend(config, $scope.$eval(attrs.config));
+                    } catch (e) {}
+
                     angular.forEach(form, function (ngModel) {
                         if (angular.isObject(ngModel) && ngModel.hasOwnProperty('$modelValue')) {
                             ngModel.$validators.server = function () {
@@ -51,8 +61,7 @@
                         if (form.ngServerValidating === true) {
                             form.ngServerValidating = false;
 
-                            var config = ngServerValidateConfig.config,
-                                errors = config.root === null ? data.errors : resolvePath(data.errors, config.root),
+                            var errors = config.root === null ? data.errors : resolvePath(data.errors, config.root),
                                 error, key, field;
 
                             for (key in errors) {
