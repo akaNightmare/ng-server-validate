@@ -74,7 +74,7 @@
 
                                 if (form.hasOwnProperty(field)) {
                                     form[field].$setValidity('server', false);
-                                    form[field].$error.server = getMessage(field, error);
+                                    form[field].$error.server = getMessage(field, config.message, error);
                                 }
                             }
                         }
@@ -104,8 +104,10 @@
 
         });
 
-    function getMessage(field, error) {
-        if (angular.isArray(error)) {
+    function getMessage(field, messageField, error) {
+        if (error[messageField]) {
+            return error[messageField];
+        } else if (angular.isArray(error)) {
             return error[0];
         } else if (angular.isObject(error)) {
             return error[Object.keys(error)[0]];
